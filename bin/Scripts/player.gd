@@ -9,6 +9,7 @@ const SPEED := 50.0
 @onready var inventory = $Inventory
 @onready var inventory_ui = %InventoryUI
 
+
 #=============================
 #  MULTIPLAYER
 #===============================
@@ -23,6 +24,7 @@ var current_tool: Node = null
 
 @export var hoe_scene: PackedScene
 @export var shovel_scene: PackedScene
+@export var collectable_item_scene: PackedScene
 
 # =========================
 # 🌐 MULTIPLAYER SETUP
@@ -47,8 +49,8 @@ func _ready():
 	else:
 		print("Vẫn chưa tìm thấy UI! Hãy kiểm tra lại Bước 1.")
 		
-	var item_ca_rot = load("res://Items/carrot.tres")
-	var item_onion = load("res://Items/onion.tres")
+	var item_ca_rot = load("res://bin/Items/carrot.tres")
+	var item_onion = load("res://bin/Items/onion.tres")
 	
 	if item_ca_rot:
 		# Thêm 5 củ cà rốt vào túi
@@ -133,3 +135,27 @@ func player_shop_method():
 @rpc("authority")
 func server_move(dir: Vector2):
 	position += dir.normalized() * 200 * get_physics_process_delta_time()
+	
+# =========================
+# 🎒 PICK UP & DROP
+# =========================
+
+# Hàm này được gọi bởi CollectableItem
+func collect_item(item: ItemData, quantity: int) -> bool:
+	if inventory:
+		return inventory.add_item(item, quantity)
+	return false
+
+# Hàm vứt đồ ra thế giới
+func drop_item(item: ItemData, quantity: int):
+	if collectable_item_scene == null:
+		print("Chưa gán CollectableItem Scene cho Player!")
+		return
+		
+	var world_item = collectable_item_scene.instantiate()
+	
+	# Spawn tại vị trí player + một chút ngẫu nhiên để không bị chồng chéo
+	world_item.global_position = global_position + Vector2(randf_range(-20, 20), randf_range(-20, 20))
+	
+	world_item.init(item, quantity)
+	get_parent().add_child(world_item) # Thêm vào World (Node cha của Player)

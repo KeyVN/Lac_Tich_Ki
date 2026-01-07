@@ -67,7 +67,22 @@ func update_grid():
 
 # --- [MỚI] Hàm nhận tín hiệu khi click vào 1 ô ---
 func _on_slot_clicked(index: int, item: ItemData):
-	if item != null:
+	if item == null: return
+	
+	# Kiểm tra nếu nhấn chuột phải (Right Click) để VỨT ĐỒ
+	if Input.is_mouse_button_pressed(MOUSE_BUTTON_RIGHT):
+		# 1. Xóa khỏi kho (xóa 1 cái)
+		var removed_data = inventory_ref.remove_item_at_index(index, 1)
+		
+		# 2. Gọi Player spawn đồ ra đất
+		if removed_data.has("item"):
+			# Tìm node player để gọi hàm drop
+			# Cách đơn giản: inventory_ref thường nằm trong player, ta lấy owner
+			var player = inventory_ref.get_parent() # Giả sử Inventory là con của Player
+			if player.has_method("drop_item"):
+				player.drop_item(removed_data["item"], removed_data["quantity"])
+				
+	else:
+		# Chuột trái thì giữ nguyên logic chọn đồ cũ
 		print("Đã chọn: ", item.name)
-		item_selected.emit(item) # Báo cho Player biết món đồ đã chọn
-		# close() # Bỏ comment nếu muốn chọn xong tự tắt túi
+		item_selected.emit(item)

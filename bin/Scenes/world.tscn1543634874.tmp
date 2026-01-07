@@ -205,14 +205,14 @@ network_player = ExtResource("3_n7j42")
 
 [node name="InventoryUI" parent="CanvasLayer" instance=ExtResource("6_brevc")]
 unique_name_in_owner = true
-offset_left = 79.0
-offset_top = 155.0
-offset_right = 119.0
-offset_bottom = 195.0
+visible = false
+offset_left = 128.0
+offset_top = 1.0
+offset_right = 168.0
+offset_bottom = 41.0
 
 [node name="worldtimer" type="Timer" parent="."]
 
 [node name="Weather" parent="." instance=ExtResource("8_esj5c")]
 
 [node name="player" parent="." instance=ExtResource("3_n7j42")]
-position = Vector2(210, 130)

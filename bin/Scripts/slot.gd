@@ -27,5 +27,8 @@ func set_slot_data(item: ItemData, quantity: int, index: int):
 
 # --- [MỚI] Hàm bắt sự kiện click chuột ---
 func _gui_input(event):
-	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
-		slot_clicked.emit(my_index, my_item)
+	if event is InputEventMouseButton and event.pressed:
+		if event.button_index == MOUSE_BUTTON_RIGHT:
+			slot_clicked.emit(get_index(), my_item) # Gửi tín hiệu ra ngoài
+		elif event.button_index == MOUSE_BUTTON_LEFT:
+			slot_clicked.emit(get_index(), my_item)

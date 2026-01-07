@@ -1,11 +1,10 @@
 [gd_scene load_steps=3 format=3 uid="uid://clr2n6eheg1um"]
 
-[ext_resource type="Script" path="res://bin/Scripts/slot.gd" id="1_vlfnc"]
+[ext_resource type="Script" uid="uid://bwxaf6nhf7ygi" path="res://bin/Scripts/slot.gd" id="1_vlfnc"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_luhj6"]
 
 [node name="Slot" type="PanelContainer"]
-modulate = Color(0.9782862, 0, 0.17516291, 1)
 self_modulate = Color(1, 1, 1, 0)
 custom_minimum_size = Vector2(40, 40)
 offset_right = 40.0
