@@ -1,0 +1,78 @@
+[gd_scene load_steps=9 format=3 uid="uid://i21oom36bn02"]
+
+[ext_resource type="Texture2D" uid="uid://beq2pemrlahou" path="res://bin/pictures/farmingTilesheetComplete.png" id="1_gtkkw"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a3jxb"]
+atlas = ExtResource("1_gtkkw")
+region = Rect2(144, 112, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_03jro"]
+atlas = ExtResource("1_gtkkw")
+region = Rect2(128, 112, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uuhic"]
+atlas = ExtResource("1_gtkkw")
+region = Rect2(192, 112, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bx2ag"]
+atlas = ExtResource("1_gtkkw")
+region = Rect2(128, 96, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k8ut7"]
+atlas = ExtResource("1_gtkkw")
+region = Rect2(192, 96, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_6wgx3"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a3jxb")
+}],
+"loop": true,
+"name": &"base",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_03jro")
+}],
+"loop": true,
+"name": &"downleft",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uuhic")
+}],
+"loop": true,
+"name": &"downright",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bx2ag")
+}],
+"loop": true,
+"name": &"upleft",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k8ut7")
+}],
+"loop": true,
+"name": &"upright",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hsy3x"]
+size = Vector2(16, 12)
+
+[node name="fence" type="StaticBody2D"]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_6wgx3")
+animation = &"upright"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_hsy3x")

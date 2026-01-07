@@ -1,0 +1,14 @@
+Label
+GridContainer
+Inventory
+CollisionShape2D
+Node2D
+Node
+MultiplayerSpawner
+MultiplayerSynchronizer
+Button
+RichTextLabel
+AnimatedSprite2D
+CanvasLayer
+Panel
+Control

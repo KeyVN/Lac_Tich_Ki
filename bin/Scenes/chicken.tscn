@@ -1,0 +1,76 @@
+[gd_scene load_steps=11 format=3 uid="uid://c23tr1j03b4wa"]
+
+[ext_resource type="Script" path="res://bin/Scripts/chicken.gd" id="1_7bdtl"]
+[ext_resource type="Texture2D" uid="uid://beq2pemrlahou" path="res://bin/pictures/farmingTilesheetComplete.png" id="2_gjwyy"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kvoki"]
+atlas = ExtResource("2_gjwyy")
+region = Rect2(48, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6c6e7"]
+atlas = ExtResource("2_gjwyy")
+region = Rect2(64, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kgf8r"]
+atlas = ExtResource("2_gjwyy")
+region = Rect2(80, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7041g"]
+atlas = ExtResource("2_gjwyy")
+region = Rect2(0, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k6ddr"]
+atlas = ExtResource("2_gjwyy")
+region = Rect2(16, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lbw3f"]
+atlas = ExtResource("2_gjwyy")
+region = Rect2(32, 32, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_y2hg1"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kvoki")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6c6e7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kgf8r")
+}],
+"loop": true,
+"name": &"eating",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7041g")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k6ddr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lbw3f")
+}],
+"loop": true,
+"name": &"walking",
+"speed": 8.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_557xv"]
+radius = 5.0
+
+[node name="chicken" type="CharacterBody2D"]
+script = ExtResource("1_7bdtl")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_y2hg1")
+animation = &"walking"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_557xv")
+
+[node name="state_timer" type="Timer" parent="."]
+
+[connection signal="timeout" from="state_timer" to="." method="_on_state_timer_timeout"]

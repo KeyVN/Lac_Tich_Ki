@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=3 format=3 uid="uid://bqic3twdnkaf0"]
+
+[ext_resource type="Texture2D" uid="uid://buej4phl4c4yn" path="res://pictures/carrot.png" id="1_nppws"]
+[ext_resource type="Script" uid="uid://d1dl2qmfrbcew" path="res://Scripts/ItemData.gd" id="1_wh5sf"]
+
+[resource]
+script = ExtResource("1_wh5sf")
+name = "carrot"
+icon = ExtResource("1_nppws")
+metadata/_custom_type_script = "uid://d1dl2qmfrbcew"

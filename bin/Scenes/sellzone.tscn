@@ -1,0 +1,68 @@
+[gd_scene load_steps=11 format=3 uid="uid://c3lbohxycv87f"]
+
+[ext_resource type="Script" path="res://bin/Scripts/sellzone.gd" id="1_i4jj7"]
+[ext_resource type="Texture2D" uid="uid://ds5j5gh3xe5tr" path="res://bin/pictures/buyer.png" id="2_163uk"]
+[ext_resource type="Texture2D" uid="uid://b3h85bwyv2r6c" path="res://bin/pictures/sellshop.png" id="3_xonyq"]
+[ext_resource type="PackedScene" uid="uid://u5anmymk5f2j" path="res://bin/Scenes/sellmenu.tscn" id="4_a2iq0"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d4h5m"]
+atlas = ExtResource("2_163uk")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_njhul"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d4h5m")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_833fq"]
+atlas = ExtResource("3_xonyq")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_smrxp"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_833fq")
+}],
+"loop": true,
+"name": &"default",
+"speed": 0.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xonyq"]
+size = Vector2(30, 23)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_d4h5m"]
+size = Vector2(24, 12)
+
+[node name="sellzone" type="StaticBody2D"]
+script = ExtResource("1_i4jj7")
+
+[node name="buyer" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_njhul")
+
+[node name="sellshopart" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -2)
+sprite_frames = SubResource("SpriteFrames_smrxp")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -1.5)
+shape = SubResource("RectangleShape2D_xonyq")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, 16)
+shape = SubResource("RectangleShape2D_d4h5m")
+
+[node name="sellmenu" parent="." instance=ExtResource("4_a2iq0")]
+position = Vector2(-43, -59)
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]

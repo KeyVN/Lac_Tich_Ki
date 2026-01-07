@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://c0lg15abomslc"]
+
+[ext_resource type="Script" uid="uid://o6ga5qccf7os" path="res://bin/Scripts/clock.gd" id="1_6dm8w"]
+[ext_resource type="FontFile" uid="uid://dosa64txg83fc" path="res://bin/pixel_operator/PixelOperatorMono.ttf" id="1_venu5"]
+
+[node name="clock" type="StaticBody2D"]
+script = ExtResource("1_6dm8w")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_right = 40.0
+offset_bottom = 16.0
+color = Color(1, 1, 0.5019608, 0.6)
+
+[node name="clocktime" type="RichTextLabel" parent="."]
+offset_right = 40.0
+offset_bottom = 16.0
+theme_override_fonts/normal_font = ExtResource("1_venu5")
+text = "00:00"

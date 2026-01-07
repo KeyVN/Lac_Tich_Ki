@@ -1,0 +1,171 @@
+[gd_scene load_steps=22 format=3 uid="uid://n0v0kcom6rau"]
+
+[ext_resource type="Script" uid="uid://bohjh0v5o1qi5" path="res://bin/Scripts/player.gd" id="1_onrkg"]
+[ext_resource type="PackedScene" uid="uid://c2t38104uv1qo" path="res://bin/Scenes/hoe.tscn" id="2_47hf4"]
+[ext_resource type="Texture2D" uid="uid://beq2pemrlahou" path="res://bin/pictures/farmingTilesheetComplete.png" id="2_i3pqv"]
+[ext_resource type="FontFile" uid="uid://dosa64txg83fc" path="res://bin/pixel_operator/PixelOperatorMono.ttf" id="3_i3pqv"]
+[ext_resource type="PackedScene" uid="uid://bck6kxnrrwrn5" path="res://bin/Scenes/shovel.tscn" id="3_jot67"]
+[ext_resource type="PackedScene" uid="uid://c0lg15abomslc" path="res://bin/Scenes/clock.tscn" id="4_dvve6"]
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_yw30f"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hqtel"]
+atlas = ExtResource("2_i3pqv")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sweqy"]
+atlas = ExtResource("2_i3pqv")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2hs0m"]
+atlas = ExtResource("2_i3pqv")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1jxqw"]
+atlas = ExtResource("2_i3pqv")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dw050"]
+atlas = ExtResource("2_i3pqv")
+region = Rect2(96, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b26j0"]
+atlas = ExtResource("2_i3pqv")
+region = Rect2(112, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n7ghd"]
+atlas = ExtResource("2_i3pqv")
+region = Rect2(128, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_onrkg"]
+atlas = ExtResource("2_i3pqv")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i3pqv"]
+atlas = ExtResource("2_i3pqv")
+region = Rect2(64, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nvl01"]
+atlas = ExtResource("2_i3pqv")
+region = Rect2(80, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_bwjto"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hqtel")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sweqy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2hs0m")
+}],
+"loop": true,
+"name": &"downwalk",
+"speed": 6.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1jxqw")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dw050")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b26j0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n7ghd")
+}],
+"loop": true,
+"name": &"sidewalk",
+"speed": 6.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_onrkg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i3pqv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nvl01")
+}],
+"loop": true,
+"name": &"upwalk",
+"speed": 6.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_onrkg"]
+radius = 5.0249376
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ivps1"]
+atlas = ExtResource("2_i3pqv")
+region = Rect2(64, 80, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_2hs0m"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ivps1")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="player" type="CharacterBody2D"]
+motion_mode = 1
+script = ExtResource("1_onrkg")
+hoe_scene = ExtResource("2_47hf4")
+shovel_scene = ExtResource("3_jot67")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_yw30f")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_bwjto")
+animation = &"upwalk"
+
+[node name="id_label" type="Label" parent="."]
+offset_left = -18.0
+offset_top = -33.0
+offset_right = 18.0
+offset_bottom = -10.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 0.5)
+shape = SubResource("CircleShape2D_onrkg")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(5, 5)
+position_smoothing_enabled = true
+
+[node name="coinnum" type="RichTextLabel" parent="."]
+offset_left = -101.0
+offset_top = -65.0
+offset_right = -67.0
+offset_bottom = -48.0
+theme_override_fonts/normal_font = ExtResource("3_i3pqv")
+text = "=100"
+
+[node name="coinicon" type="AnimatedSprite2D" parent="."]
+position = Vector2(-107, -57)
+sprite_frames = SubResource("SpriteFrames_2hs0m")
+
+[node name="clock" parent="." instance=ExtResource("4_dvve6")]
+position = Vector2(75, -65)
+script = null
+
+[node name="ToolHolder" type="Node2D" parent="."]
+
+[node name="Inventory" type="Node" parent="."]
