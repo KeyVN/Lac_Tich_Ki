@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=3 format=3 uid="uid://dbbjf51acufih"]
+
+[ext_resource type="Script" uid="uid://d1dl2qmfrbcew" path="res://bin/Scripts/ItemData.gd" id="1_78emr"]
+[ext_resource type="Texture2D" uid="uid://cvra4gc8yinre" path="res://bin/pictures/onion_seedpack.png" id="1_isb72"]
+
+[resource]
+script = ExtResource("1_78emr")
+icon = ExtResource("1_isb72")
+metadata/_custom_type_script = "uid://d1dl2qmfrbcew"

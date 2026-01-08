@@ -1,7 +1,7 @@
 [gd_scene load_steps=14 format=3 uid="uid://bs3416thneq24"]
 
-[ext_resource type="Script" uid="uid://bmj77d0t7wpqn" path="res://Scripts/growingzone.gd" id="1_w48n1"]
-[ext_resource type="Texture2D" uid="uid://beq2pemrlahou" path="res://pictures/farmingTilesheetComplete.png" id="2_wpk8d"]
+[ext_resource type="Script" uid="uid://bmj77d0t7wpqn" path="res://bin/Scripts/growingzone.gd" id="1_w48n1"]
+[ext_resource type="Texture2D" uid="uid://beq2pemrlahou" path="res://bin/pictures/farmingTilesheetComplete.png" id="2_wpk8d"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2ov6t"]
 atlas = ExtResource("2_wpk8d")

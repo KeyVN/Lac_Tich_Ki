@@ -18,7 +18,7 @@ func spawn_growingzone(cell: Vector2i):
 	var zone = growingzone_scene.instantiate()
 	var pos = tilemap.map_to_local(cell)
 	zone.global_position = tilemap.to_global(pos)
-
+	zone.z_index = -1 # <--- Thêm dòng này: Đảm bảo đất nằm dưới chân Player
 	world.add_child(zone)
 	world.growing_zones[cell] = zone
 

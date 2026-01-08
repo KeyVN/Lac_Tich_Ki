@@ -23,6 +23,7 @@ animations = [{
 radius = 4.0
 
 [node name="hoe" type="StaticBody2D"]
+z_index = 2
 script = ExtResource("1_r1l4f")
 growingzone_scene = ExtResource("2_6jnvu")
 

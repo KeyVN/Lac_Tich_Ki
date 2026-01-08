@@ -11,6 +11,10 @@ func setup(player: CharacterBody2D):
 	tilemap = world.get_node("TileMap") # đúng tên node TileMap trong World
 
 func _unhandled_input(event):
+	# Kiểm tra nếu owner_player chưa được gán (vẫn là null) thì thoát sớm
+	if owner_player == null:
+		return
+
 	# ❗ chỉ tool của player mình mới được dùng
 	if not owner_player.is_multiplayer_authority():
 		return

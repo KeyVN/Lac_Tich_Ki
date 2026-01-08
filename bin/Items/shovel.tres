@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=3 format=3 uid="uid://c1rvucgcadr44"]
+
+[ext_resource type="Texture2D" uid="uid://cpxjghkoh36l6" path="res://bin/pictures/shovel.png" id="1_5rksw"]
+[ext_resource type="Script" uid="uid://d1dl2qmfrbcew" path="res://bin/Scripts/ItemData.gd" id="1_qtux6"]
+
+[resource]
+script = ExtResource("1_qtux6")
+icon = ExtResource("1_5rksw")
+metadata/_custom_type_script = "uid://d1dl2qmfrbcew"

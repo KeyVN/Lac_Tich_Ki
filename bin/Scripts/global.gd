@@ -2,7 +2,7 @@ extends Node
 
 #================================multiplayer============================
 var is_host := false
-var server_ip := "10.29.83.0/24"
+var server_ip := ""
 var user_name := ""
 #================================veget==================================
 var plantselected = 0
@@ -12,6 +12,11 @@ var numofveget: Array[int] = [100, 100]
 var numofseedpack: Array[int] = [0, 0]
 var timeofveget: Array[int] = [4, 5]
 var nameofveget: Array[String] = ["carrot", "onion"]
+
+enum SeedType {
+	CARROT,
+	ONION
+}
 
 var priceofveget: Array[int] = [2, 3]
 

@@ -8,6 +8,7 @@
 script = ExtResource("1_ww4bv")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+light_mask = 3
 
 [node name="CircleShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_ww4bv")

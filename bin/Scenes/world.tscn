@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://pyfjpg0q31bv"]
+[gd_scene load_steps=14 format=3 uid="uid://pyfjpg0q31bv"]
 
 [ext_resource type="Texture2D" uid="uid://beq2pemrlahou" path="res://bin/pictures/farmingTilesheetComplete.png" id="1_boaiq"]
 [ext_resource type="Script" uid="uid://cnai0yevg8cd8" path="res://bin/Scripts/world.gd" id="1_brevc"]
@@ -7,7 +7,10 @@
 [ext_resource type="Script" uid="uid://c1g12cc12wuaa" path="res://bin/Scripts/player_spawner.gd" id="5_brevc"]
 [ext_resource type="PackedScene" uid="uid://br0esab78ickg" path="res://bin/Scenes/inventory_ui.tscn" id="6_brevc"]
 [ext_resource type="PackedScene" uid="uid://b58ly3j61trn5" path="res://bin/Scenes/weather_control.tscn" id="8_esj5c"]
+[ext_resource type="PackedScene" uid="uid://dkqx3cpradi55" path="res://bin/Scenes/seed_pack.tscn" id="9_fx6pk"]
 [ext_resource type="PackedScene" uid="uid://c42nsxm86ki5s" path="res://bin/Scenes/notification_layer.tscn" id="9_oxsr6"]
+[ext_resource type="PackedScene" uid="uid://bck6kxnrrwrn5" path="res://bin/Scenes/shovel.tscn" id="9_t8323"]
+[ext_resource type="PackedScene" uid="uid://c2t38104uv1qo" path="res://bin/Scenes/hoe.tscn" id="10_dka8r"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_s6p3q"]
 texture = ExtResource("1_boaiq")
@@ -213,3 +216,16 @@ offset_bottom = 195.0
 [node name="Weather" parent="." instance=ExtResource("8_esj5c")]
 
 [node name="NotificationLayer" parent="." instance=ExtResource("9_oxsr6")]
+
+[node name="shovel" parent="." instance=ExtResource("9_t8323")]
+position = Vector2(62, 48)
+
+[node name="hoe" parent="." instance=ExtResource("10_dka8r")]
+position = Vector2(25, 22)
+
+[node name="seed_pack" parent="." instance=ExtResource("9_fx6pk")]
+position = Vector2(62, 22)
+type = 0
+
+[node name="seed_pack2" parent="." instance=ExtResource("9_fx6pk")]
+position = Vector2(31, 49)

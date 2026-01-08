@@ -105,8 +105,79 @@ func update_animation(input_vector: Vector2):
 		sprite.flip_h = input_vector.x > 0
 
 # =========================
-# 🛠 SPAWN TOOL
+# 🛠 INVENTORY - HOTBAR SETUP
 # =========================
+var selected_slot: int = 1
+@onready var hotbar = $CanvasLayer/Hotbar # Trỏ đúng đường dẫn node
+
+func _input(event):
+	if not is_multiplayer_authority(): return
+	
+	if event is InputEventMouseButton and event.pressed:
+		if event.button_index == MOUSE_BUTTON_WHEEL_UP:
+			selected_slot = (selected_slot + 8) % 9
+			update_selection()
+		elif event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
+			selected_slot = (selected_slot + 1) % 9
+			update_selection()
+	# Thêm phần xử lý phím số bên dưới:
+	if event is InputEventKey and event.pressed:
+		for i in range(1, 10):
+			if event.is_action_pressed("slot_" + str(i)):
+				selected_slot = i - 1  # Vì slot_1 tương ứng với index 0
+				update_selection()
+				break
+
+func update_selection():
+	# 1. Bảo UI di chuyển cái khung
+	hotbar.move_selector(selected_slot)
+	
+	# 2. Cầm đồ lên tay (Hàm sync_held_item bạn đã làm trước đó)
+	sync_held_item()
+
+func change_selected_slot(dir: int):
+	# Sử dụng posmod để đảm bảo giá trị luôn từ 0-9
+	selected_slot = posmod(selected_slot + dir, 10)
+	
+	# Gọi UI di chuyển khung
+	if hotbar:
+		hotbar.move_selector(selected_slot)
+	
+	# Cập nhật món đồ trên tay
+	sync_held_item()
+
+func sync_held_item():
+	# 1. Xóa đồ cũ
+	for child in tool_holder.get_children():
+		child.queue_free()
+	
+	# 2. Lấy dữ liệu từ Inventory
+	# Lưu ý: Bạn cần đảm bảo đã bỏ cây Cuốc/Xẻng vào ô đầu tiên của túi đồ
+	var slot_data = inventory.items[selected_slot]
+	
+	if slot_data != null and slot_data.has("item"):
+		var item = slot_data["item"] as ItemData
+		var item_name = item.name.to_lower()
+		
+		if "hoe" in item_name:
+			spawn_tool_instance(hoe_scene, Global.Tool.HOE)
+		elif "shovel" in item_name:
+			spawn_tool_instance(shovel_scene, Global.Tool.SHOVEL)
+		elif "seed" in item_name:
+			Global.toolselected = Global.Tool.SEED
+			Global.plantselected = item.id
+		else:
+			Global.toolselected = Global.Tool.NONE
+	else:
+		# Nếu ô trống, tay sẽ không cầm gì
+		Global.toolselected = Global.Tool.NONE
+
+func spawn_tool_instance(scene, type):
+	var t = scene.instantiate()
+	tool_holder.add_child(t)
+	t.setup(self)
+	Global.toolselected = type
+
 func spawn_tools():
 	var hoe: ToolBase = hoe_scene.instantiate()
 	var shovel: ToolBase = shovel_scene.instantiate()
@@ -170,7 +241,12 @@ func server_move(dir: Vector2):
 # Hàm này được gọi bởi CollectableItem
 func collect_item(item: ItemData, quantity: int) -> bool:
 	if inventory:
-		return inventory.add_item(item, quantity)
+		var success = inventory.add_item(item, quantity)
+		if success:
+			# Sau khi thêm đồ, làm mới Hotbar và Inventory UI
+			if hotbar: hotbar.refresh_ui() 
+			if inventory_ui: inventory_ui.update_grid()
+		return success
 	return false
 
 # Hàm vứt đồ ra thế giới

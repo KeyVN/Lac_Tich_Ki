@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://n0v0kcom6rau"]
+[gd_scene load_steps=25 format=3 uid="uid://n0v0kcom6rau"]
 
 [ext_resource type="Script" uid="uid://bohjh0v5o1qi5" path="res://bin/Scripts/player.gd" id="1_onrkg"]
 [ext_resource type="PackedScene" uid="uid://c2t38104uv1qo" path="res://bin/Scenes/hoe.tscn" id="2_47hf4"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://c0lg15abomslc" path="res://bin/Scenes/clock.tscn" id="4_dvve6"]
 [ext_resource type="PackedScene" uid="uid://cwjqi8ojwkab8" path="res://bin/Scenes/CollectableItem.tscn" id="4_mjsew"]
 [ext_resource type="Script" uid="uid://x6iq2uom35t0" path="res://bin/Scripts/Inventory.gd" id="7_jot67"]
+[ext_resource type="PackedScene" uid="uid://dittbeb7a4mlk" path="res://bin/Scenes/hotbar.tscn" id="7_mjsew"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_yw30f"]
 properties/0/path = NodePath(".:position")
@@ -132,6 +133,7 @@ animations = [{
 }]
 
 [node name="player" type="CharacterBody2D"]
+z_index = 1
 motion_mode = 1
 script = ExtResource("1_onrkg")
 hoe_scene = ExtResource("2_47hf4")
@@ -184,3 +186,9 @@ text = "=100"
 position = Vector2(42, 36)
 scale = Vector2(3.375, 2.9375)
 sprite_frames = SubResource("SpriteFrames_2hs0m")
+
+[node name="Hotbar" parent="CanvasLayer" instance=ExtResource("7_mjsew")]
+offset_left = 330.0
+offset_top = 580.0
+offset_right = 871.0
+offset_bottom = 641.0
