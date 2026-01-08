@@ -17,8 +17,8 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-HighLevelNetworkHandler="*res://bin/Scripts/high_level_network_handler.gd"
 Global="*res://bin/Scripts/global.gd"
+Network="*res://bin/Scripts/Network.gd"
 
 [dotnet]
 

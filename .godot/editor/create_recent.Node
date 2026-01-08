@@ -1,8 +1,10 @@
+Label
+CanvasLayer
+LineEdit
 Inventory
 CollisionShape2D
 Sprite2D
 Area2D
-Label
 GridContainer
 Node2D
 Node
@@ -10,5 +12,3 @@ MultiplayerSpawner
 MultiplayerSynchronizer
 Button
 RichTextLabel
-AnimatedSprite2D
-CanvasLayer

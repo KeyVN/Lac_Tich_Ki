@@ -3,7 +3,7 @@ extends Node
 #================================multiplayer============================
 var is_host := false
 var server_ip := "10.29.83.0/24"
-
+var user_name := ""
 #================================veget==================================
 var plantselected = 0
 var numofvegetspecies = 1

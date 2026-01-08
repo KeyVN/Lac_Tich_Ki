@@ -32,14 +32,20 @@ var current_tool: Node = null
 @onready var id_label: Label = $id_label
 
 func _ready():
-	if multiplayer.has_multiplayer_peer():
-		set_multiplayer_authority(multiplayer.get_unique_id())
+	# Chỉ setup UI nếu là nhân vật của chính mình
+	if is_multiplayer_authority():
+		$Camera2D.make_current() # Đảm bảo Camera đi theo đúng người
 		
 	id_label.text = "ID: %d" % get_multiplayer_authority()
 
 	#❗ chỉ spawn tool cho player của mình
 	if is_multiplayer_authority():
 		spawn_tools()
+
+	if name.to_int() == 1:
+		id_label.text = "[HOST] " + name
+	else:
+		id_label.text = "Player: " + name
 
 
 	# Kiểm tra chắc chắn UI đã tìm thấy chưa (để debug)
@@ -59,6 +65,30 @@ func _ready():
 		print("Đã thêm cà rốt vào túi!")
 	else:
 		print("Lỗi: Không tìm thấy file ItemData! Kiểm tra lại đường dẫn.")
+		
+	
+# =========================
+# 📡 SERVER SYNC
+# =========================
+# Hàm này chạy trên Server (ID 1) khi Client gửi vị trí lên
+@rpc("any_peer", "call_local", "unreliable") 
+func server_update_position(new_pos: Vector2):
+	# Chỉ Server mới được quyền cập nhật vị trí cho các bản sao khác
+	if multiplayer.is_server():
+		global_position = new_pos
+
+# Hàm Update Animation tách riêng cho gọn
+func update_animation(input_vector: Vector2):
+	if input_vector.length() == 0:
+		sprite.play("idle")
+		return
+
+	if abs(input_vector.y) >= abs(input_vector.x):
+		sprite.play("upwalk" if input_vector.y < 0 else "downwalk")
+	else:
+		sprite.play("sidewalk")
+		sprite.flip_h = input_vector.x > 0
+
 # =========================
 # 🛠 SPAWN TOOL
 # =========================
@@ -90,37 +120,19 @@ func set_active_tool(tool: Node):
 # 🎮 VÒNG LẶP VẬT LÝ
 # =========================
 func _physics_process(delta: float) -> void:
-	if not is_multiplayer_authority():
-		return
-
-	var dir := Vector2.ZERO
-	dir.x = Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left")
-	dir.y = Input.get_action_strength("ui_down") - Input.get_action_strength("ui_up")
-
-	rpc_id(1, "server_move", dir)
-
-	var input_vector := Vector2(
-		Input.get_axis("ui_left", "ui_right"),
-		Input.get_axis("ui_up", "ui_down")
-	)
-
-	# DEADZONE
-	if input_vector.length() < 0.3:
-		velocity = Vector2.ZERO
-		sprite.play("idle")
+	# 1. Nếu là chủ nhân vật (Authority): Gửi input lên server
+	if is_multiplayer_authority():
+		var input_vector := Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
+		
+		# Di chuyển client-side prediction (cho mượt trên máy mình trước)
+		velocity = input_vector * SPEED
 		move_and_slide()
-		return
-
-	input_vector = input_vector.normalized()
-	velocity = input_vector * SPEED
-
-	if abs(input_vector.y) >= abs(input_vector.x):
-		sprite.play("upwalk" if input_vector.y < 0 else "downwalk")
-	else:
-		sprite.play("sidewalk")
-		sprite.flip_h = input_vector.x > 0
-
-	move_and_slide()
+		
+		# Cập nhật animation
+		update_animation(input_vector)
+		
+		# Gửi vị trí lên server để server biết mình đang ở đâu
+		rpc_id(1, "server_update_position", global_position)
 	
 
 # =========================

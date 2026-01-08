@@ -1,13 +1,14 @@
-[gd_scene load_steps=11 format=3 uid="uid://pyfjpg0q31bv"]
+[gd_scene load_steps=12 format=3 uid="uid://pyfjpg0q31bv"]
 
-[ext_resource type="Texture2D" uid="uid://cki0goghiba0" path="res://bin/pictures/farmingTilesheetComplete.png" id="1_boaiq"]
+[ext_resource type="Texture2D" uid="uid://beq2pemrlahou" path="res://bin/pictures/farmingTilesheetComplete.png" id="1_boaiq"]
 [ext_resource type="Script" uid="uid://cnai0yevg8cd8" path="res://bin/Scripts/world.gd" id="1_brevc"]
-[ext_resource type="Script" uid="uid://c1g12cc12wuaa" path="res://bin/Scripts/high_level_player_spawner.gd" id="1_xa5q7"]
 [ext_resource type="PackedScene" uid="uid://bs3416thneq24" path="res://bin/Scenes/growingzone.tscn" id="2_7ix1w"]
 [ext_resource type="PackedScene" uid="uid://ucabdyrsn7bt" path="res://bin/Scenes/high_level_ui.tscn" id="2_evg4q"]
 [ext_resource type="PackedScene" uid="uid://n0v0kcom6rau" path="res://bin/Scenes/player.tscn" id="3_n7j42"]
+[ext_resource type="Script" uid="uid://c1g12cc12wuaa" path="res://bin/Scripts/player_spawner.gd" id="5_brevc"]
 [ext_resource type="PackedScene" uid="uid://br0esab78ickg" path="res://bin/Scenes/inventory_ui.tscn" id="6_brevc"]
 [ext_resource type="PackedScene" uid="uid://b58ly3j61trn5" path="res://bin/Scenes/weather_control.tscn" id="8_esj5c"]
+[ext_resource type="PackedScene" uid="uid://c42nsxm86ki5s" path="res://bin/Scenes/notification_layer.tscn" id="9_oxsr6"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_s6p3q"]
 texture = ExtResource("1_boaiq")
@@ -198,10 +199,11 @@ visible = false
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
 _spawnable_scenes = PackedStringArray("uid://n0v0kcom6rau")
 spawn_path = NodePath("..")
-script = ExtResource("1_xa5q7")
+script = ExtResource("5_brevc")
 network_player = ExtResource("3_n7j42")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+visible = false
 
 [node name="InventoryUI" parent="CanvasLayer" instance=ExtResource("6_brevc")]
 unique_name_in_owner = true
@@ -214,5 +216,4 @@ offset_bottom = 195.0
 
 [node name="Weather" parent="." instance=ExtResource("8_esj5c")]
 
-[node name="player" parent="." instance=ExtResource("3_n7j42")]
-position = Vector2(210, 130)
+[node name="NotificationLayer" parent="." instance=ExtResource("9_oxsr6")]

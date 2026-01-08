@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://c42nsxm86ki5s"]
+
+[ext_resource type="Script" uid="uid://xb6gh7h4ius0" path="res://bin/Scripts/notification_layer.gd" id="1_yyhpp"]
+
+[node name="NotificationLayer" type="CanvasLayer"]
+script = ExtResource("1_yyhpp")
+
+[node name="NoticeLabel" type="Label" parent="."]
+offset_right = 40.0
+offset_bottom = 23.0
