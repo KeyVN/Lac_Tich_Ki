@@ -31,6 +31,15 @@ func _ready():
 	multiplayer.peer_connected.connect(_on_player_connected)
 	# Kết nối tín hiệu khi có người thoát
 	multiplayer.peer_disconnected.connect(_on_player_disconnected)
+	
+	# Nếu là Client, chúng ta đợi một chút để nhận dữ liệu mạng
+	if not multiplayer.is_server():
+		await get_tree().create_timer(1.0).timeout 
+	
+	# Tìm node LoadingScreen ở ngoài Root và tắt nó đi
+	var loader = get_tree().root.get_node_or_null("LoadingScreen")
+	if loader:
+		loader.finish()
 # =========================
 # MULTIPLAYER
 # =========================

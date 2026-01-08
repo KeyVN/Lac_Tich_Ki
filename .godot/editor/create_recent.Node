@@ -1,5 +1,9 @@
 Label
+ColorRect
 CanvasLayer
+VBoxContainer
+TextureRect
+Control
 LineEdit
 Inventory
 CollisionShape2D
@@ -8,7 +12,3 @@ Area2D
 GridContainer
 Node2D
 Node
-MultiplayerSpawner
-MultiplayerSynchronizer
-Button
-RichTextLabel

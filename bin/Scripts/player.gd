@@ -47,7 +47,6 @@ func _ready():
 	else:
 		id_label.text = "Player: " + name
 
-
 	# Kiểm tra chắc chắn UI đã tìm thấy chưa (để debug)
 	if inventory_ui:
 		inventory_ui.set_inventory(inventory)
