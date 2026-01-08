@@ -7,12 +7,15 @@
 script = ExtResource("1_th248")
 
 [node name="ColorRect" type="ColorRect" parent="."]
-offset_right = 144.0
-offset_bottom = 40.0
+offset_right = 1152.0
+offset_bottom = 648.0
 color = Color(0, 0, 0, 1)
 
 [node name="Label" type="Label" parent="."]
-offset_right = 40.0
-offset_bottom = 23.0
+offset_left = 316.0
+offset_top = 283.0
+offset_right = 828.0
+offset_bottom = 347.0
 theme_override_fonts/font = ExtResource("1_7f5jo")
+theme_override_font_sizes/font_size = 64
 text = "World loading..."

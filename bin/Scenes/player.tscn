@@ -159,24 +159,28 @@ shape = SubResource("CircleShape2D_onrkg")
 zoom = Vector2(5, 5)
 position_smoothing_enabled = true
 
-[node name="coinnum" type="RichTextLabel" parent="."]
-offset_left = -101.0
-offset_top = -65.0
-offset_right = -67.0
-offset_bottom = -48.0
-theme_override_fonts/normal_font = ExtResource("3_i3pqv")
-text = "=100"
-
-[node name="coinicon" type="AnimatedSprite2D" parent="."]
-position = Vector2(-107, -57)
-sprite_frames = SubResource("SpriteFrames_2hs0m")
-
-[node name="clock" parent="." instance=ExtResource("4_dvve6")]
-position = Vector2(75, -65)
-script = null
-
 [node name="ToolHolder" type="Node2D" parent="."]
 
 [node name="Inventory" type="Node" parent="."]
 script = ExtResource("7_jot67")
 metadata/_custom_type_script = "uid://x6iq2uom35t0"
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="clock" parent="CanvasLayer" instance=ExtResource("4_dvve6")]
+position = Vector2(986, -1)
+script = null
+
+[node name="coinnum" type="RichTextLabel" parent="CanvasLayer"]
+offset_left = 70.0
+offset_top = 1.0
+offset_right = 208.0
+offset_bottom = 66.0
+theme_override_fonts/normal_font = ExtResource("3_i3pqv")
+theme_override_font_sizes/normal_font_size = 64
+text = "=100"
+
+[node name="coinicon" type="AnimatedSprite2D" parent="CanvasLayer"]
+position = Vector2(42, 36)
+scale = Vector2(3.375, 2.9375)
+sprite_frames = SubResource("SpriteFrames_2hs0m")

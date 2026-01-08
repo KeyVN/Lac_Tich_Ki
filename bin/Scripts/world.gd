@@ -86,10 +86,12 @@ func rpc_sync_time(t: float):
 	Global.hours = int(time / 60)
 	Global.minutes = int(time) % 60
 	
-	# Cập nhật cho tất cả các con của node players 
+	# Duyệt qua tất cả player trong node $players
 	for p in $players.get_children():
-		if p.has_node("clock"):
-			p.get_node("clock").update_clock_time()
+		# Sửa đường dẫn: p/CanvasLayer/clock
+		var clock_path = "CanvasLayer/clock" 
+		if p.has_node(clock_path):
+			p.get_node(clock_path).update_clock_time()
 
 # =========================
 # 🌅 TIME STATE

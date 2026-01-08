@@ -64,7 +64,23 @@ func _ready():
 		print("Đã thêm cà rốt vào túi!")
 	else:
 		print("Lỗi: Không tìm thấy file ItemData! Kiểm tra lại đường dẫn.")
+	
+	spawn_tools()
+	
+	if is_multiplayer_authority():
+		$Camera2D.make_current()
 		
+		# SỬA ĐOẠN NÀY:
+		if has_node("CanvasLayer"):
+			$CanvasLayer.show() # Lệnh này cực kỳ quan trọng để hiện UI
+			print("Đã thực thi lệnh hiện UI cho: ", name)
+		
+		if inventory_ui:
+			inventory_ui.show()
+	else:
+		# Ẩn UI của người khác trên máy mình
+		if has_node("CanvasLayer"):
+			$CanvasLayer.hide()
 	
 # =========================
 # 📡 SERVER SYNC

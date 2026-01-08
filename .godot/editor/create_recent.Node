@@ -1,6 +1,7 @@
+ReferenceRect
+CanvasLayer
 Label
 ColorRect
-CanvasLayer
 VBoxContainer
 TextureRect
 Control

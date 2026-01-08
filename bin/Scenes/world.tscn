@@ -200,7 +200,6 @@ script = ExtResource("5_brevc")
 network_player = ExtResource("3_n7j42")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
-visible = false
 
 [node name="InventoryUI" parent="CanvasLayer" instance=ExtResource("6_brevc")]
 unique_name_in_owner = true
