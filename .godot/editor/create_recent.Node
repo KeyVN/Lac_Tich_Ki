@@ -1,9 +1,9 @@
 TextureRect
-HBoxContainer
 Control
+Area2D
+HBoxContainer
 CanvasLayer
 CollisionShape2D
-Area2D
 AnimatedSprite2D
 StaticBody2D
 ReferenceRect

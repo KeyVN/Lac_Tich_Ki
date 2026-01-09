@@ -4,32 +4,39 @@ class_name Inventory
 
 signal inventory_changed
 @export var items: Array = []
-@export var size: int = 20
+@export var size: int = 36
 
 func _ready():
 	items.resize(size)
 
-# SỬA LẠI: Trả về bool để biết có thêm được không
 func add_item(item_data: ItemData, quantity: int) -> bool:
-	# 1. Cộng dồn (Stacking)
+	# GIAI ĐOẠN 1: TÌM ĐỂ CỘNG DỒN (STACKING) - Ưu tiên cộng vào ô đang có sẵn
 	for i in range(items.size()):
 		if items[i] != null and items[i]["item"] == item_data:
-			# Kiểm tra max stack nếu cần (bạn đã có max_stack_size trong ItemData)
 			var new_quantity = items[i]["quantity"] + quantity
 			if new_quantity <= item_data.max_stack_size:
 				items[i]["quantity"] = new_quantity
 				inventory_changed.emit()
-				return true # Thành công
+				return true
+	
+	# GIAI ĐOẠN 2: TÌM Ô TRỐNG TRONG HOTBAR (0 -> 9)
+	# Đây là đoạn giúp ưu tiên nhặt vào tay trước
+	var hotbar_size = 10 # Giả sử hotbar có 10 ô
+	for i in range(hotbar_size):
+		if i < items.size() and items[i] == null:
+			items[i] = {"item": item_data, "quantity": quantity}
+			inventory_changed.emit()
+			return true
 			
-	# 2. Tìm ô trống
-	for i in range(items.size()):
+	# GIAI ĐOẠN 3: TÌM Ô TRỐNG TRONG BALO (Từ 10 trở đi)
+	for i in range(hotbar_size, items.size()):
 		if items[i] == null:
 			items[i] = {"item": item_data, "quantity": quantity}
 			inventory_changed.emit()
-			return true # Thành công
-	
+			return true
+
 	print("Túi đầy rồi!")
-	return false # Thất bại
+	return false
 
 # THÊM MỚI: Hàm xóa đồ khỏi túi (dùng để vứt)
 # Trả về dữ liệu item đã xóa để ném ra đất

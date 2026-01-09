@@ -5,6 +5,6 @@
 
 [resource]
 script = ExtResource("1_0k8oc")
-id = 2
+id = 1
 icon = ExtResource("1_57d56")
 metadata/_custom_type_script = "uid://d1dl2qmfrbcew"

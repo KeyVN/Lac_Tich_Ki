@@ -6,17 +6,21 @@
 
 [node name="Slot" type="PanelContainer"]
 self_modulate = Color(1, 1, 1, 0)
-custom_minimum_size = Vector2(40, 40)
-offset_right = 40.0
-offset_bottom = 40.0
+custom_minimum_size = Vector2(56, 56)
+offset_right = 60.0
+offset_bottom = 60.0
 theme_override_styles/panel = SubResource("StyleBoxEmpty_luhj6")
 script = ExtResource("1_vlfnc")
 
 [node name="Icon" type="TextureRect" parent="."]
-custom_minimum_size = Vector2(32, 32)
+custom_minimum_size = Vector2(55, 55)
 layout_mode = 2
 expand_mode = 1
 stretch_mode = 5
 
 [node name="AmountLabel" type="Label" parent="."]
 layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+horizontal_alignment = 2
+vertical_alignment = 2

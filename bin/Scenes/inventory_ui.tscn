@@ -1,23 +1,34 @@
-[gd_scene load_steps=2 format=3 uid="uid://br0esab78ickg"]
+[gd_scene load_steps=3 format=3 uid="uid://br0esab78ickg"]
 
 [ext_resource type="Script" uid="uid://d3em5af76op3p" path="res://bin/Scripts/inventory_ui.gd" id="1_8su62"]
+[ext_resource type="Texture2D" uid="uid://b3cug2cqvaj07" path="res://bin/pictures/inventory.png" id="2_0ij4j"]
 
 [node name="InventoryUI" type="Control"]
+self_modulate = Color(1, 1, 1, 0)
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("1_8su62")
 
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = -238.00002
+offset_top = -481.00003
+offset_right = 17.999985
+offset_bottom = -225.00003
+scale = Vector2(3.72, 3.72)
+texture = ExtResource("2_0ij4j")
+
 [node name="Panel" type="Panel" parent="."]
 layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+offset_right = 60.0
+offset_bottom = 60.0
 
 [node name="GridContainer" type="GridContainer" parent="."]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(200, 200)
+custom_minimum_size = Vector2(200, 100)
 layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
-columns = 5
+offset_right = 540.0
+offset_bottom = 180.0
+columns = 3

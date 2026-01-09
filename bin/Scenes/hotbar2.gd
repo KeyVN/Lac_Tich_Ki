@@ -4,7 +4,6 @@ extends Control
 signal slot_selected(index: int) # Báo cho Player biết mình chọn ô nào
 
 @onready var grid = $Grid
-@onready var selector = $Selector
 var slot_scene = preload("res://bin/Scenes/slot.tscn")
 var inventory_ref: Inventory
 
@@ -35,12 +34,7 @@ func refresh_ui():
 				slot.set_slot_data(data["item"], data["quantity"], i)
 			else: 
 				slot.set_slot_data(null, 0, i)
-
-func move_selector(index: int):
-	# Dùng call_deferred để tránh lỗi vị trí khi khung hình chưa vẽ xong
-	if is_node_ready():
-		$Selector.position = Vector2(index * 60, 0) # 60 là khoảng cách giữa các ô
-
+				
 # Hàm xử lý khi người chơi click chuột vào ô trên Hotbar
 func _on_slot_clicked(index: int, _item: ItemData):
 	# Nếu click chuột phải: Vứt đồ (Giống InventoryUI)

@@ -1,9 +1,10 @@
 [gd_resource type="Resource" script_class="ItemData" load_steps=3 format=3 uid="uid://cnq0vmlwlmw00"]
 
-[ext_resource type="Texture2D" uid="uid://bur25hwf34gdc" path="res://bin/pictures/hoe.png" id="1_82pr1"]
+[ext_resource type="Texture2D" uid="uid://cl8l75jp6pcc5" path="res://bin/pictures/hoe.png" id="1_82pr1"]
 [ext_resource type="Script" uid="uid://d1dl2qmfrbcew" path="res://bin/Scripts/ItemData.gd" id="1_qdktw"]
 
 [resource]
 script = ExtResource("1_qdktw")
+id = 10
 icon = ExtResource("1_82pr1")
 metadata/_custom_type_script = "uid://d1dl2qmfrbcew"

@@ -5,7 +5,6 @@ extends CharacterBody2D
 # =========================
 const SPEED := 50.0
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
-@onready var tools_node: Node2D = $Tools
 @onready var inventory = $Inventory
 @onready var inventory_ui = %InventoryUI
 
@@ -16,14 +15,6 @@ const SPEED := 50.0
 func _enter_tree() -> void:
 	set_multiplayer_authority(name.to_int())
 
-# =========================
-# 🛠 TOOL SETUP
-# =========================
-@onready var tool_holder = $ToolHolder
-var current_tool: Node = null
-
-@export var hoe_scene: PackedScene
-@export var shovel_scene: PackedScene
 @export var collectable_item_scene: PackedScene
 
 # =========================
@@ -38,10 +29,6 @@ func _ready():
 		
 	id_label.text = "ID: %d" % get_multiplayer_authority()
 
-	#❗ chỉ spawn tool cho player của mình
-	if is_multiplayer_authority():
-		spawn_tools()
-
 	if name.to_int() == 1:
 		id_label.text = "[HOST] " + name
 	else:
@@ -50,7 +37,7 @@ func _ready():
 	# Kiểm tra chắc chắn UI đã tìm thấy chưa (để debug)
 	if inventory_ui:
 		inventory_ui.set_inventory(inventory)
-		print("Đã kết nối Inventory UI thành công!")
+		print("Đã kết ndối Inventory UI thành công!")
 	else:
 		print("Vẫn chưa tìm thấy UI! Hãy kiểm tra lại Bước 1.")
 		
@@ -65,7 +52,11 @@ func _ready():
 	else:
 		print("Lỗi: Không tìm thấy file ItemData! Kiểm tra lại đường dẫn.")
 	
-	spawn_tools()
+	if hotbar:
+		hotbar.set_inventory(inventory)
+		# --- [MỚI] Lắng nghe sự kiện click từ Hotbar ---
+		if not hotbar.slot_selected.is_connected(_on_hotbar_slot_selected):
+			hotbar.slot_selected.connect(_on_hotbar_slot_selected)
 	
 	if is_multiplayer_authority():
 		$Camera2D.make_current()
@@ -81,7 +72,11 @@ func _ready():
 		# Ẩn UI của người khác trên máy mình
 		if has_node("CanvasLayer"):
 			$CanvasLayer.hide()
-	
+			
+func _on_hotbar_slot_selected(index: int):
+	selected_slot = index
+	update_selection() # Gọi hàm cập nhật cầm đồ (đã có sẵn của bạn)
+
 # =========================
 # 📡 SERVER SYNC
 # =========================
@@ -131,9 +126,6 @@ func _input(event):
 func update_selection():
 	# 1. Bảo UI di chuyển cái khung
 	hotbar.move_selector(selected_slot)
-	
-	# 2. Cầm đồ lên tay (Hàm sync_held_item bạn đã làm trước đó)
-	sync_held_item()
 
 func change_selected_slot(dir: int):
 	# Sử dụng posmod để đảm bảo giá trị luôn từ 0-9
@@ -143,65 +135,6 @@ func change_selected_slot(dir: int):
 	if hotbar:
 		hotbar.move_selector(selected_slot)
 	
-	# Cập nhật món đồ trên tay
-	sync_held_item()
-
-func sync_held_item():
-	# 1. Xóa đồ cũ
-	for child in tool_holder.get_children():
-		child.queue_free()
-	
-	# 2. Lấy dữ liệu từ Inventory
-	# Lưu ý: Bạn cần đảm bảo đã bỏ cây Cuốc/Xẻng vào ô đầu tiên của túi đồ
-	var slot_data = inventory.items[selected_slot]
-	
-	if slot_data != null and slot_data.has("item"):
-		var item = slot_data["item"] as ItemData
-		var item_name = item.name.to_lower()
-		
-		if "hoe" in item_name:
-			spawn_tool_instance(hoe_scene, Global.Tool.HOE)
-		elif "shovel" in item_name:
-			spawn_tool_instance(shovel_scene, Global.Tool.SHOVEL)
-		elif "seed" in item_name:
-			Global.toolselected = Global.Tool.SEED
-			Global.plantselected = item.id
-		else:
-			Global.toolselected = Global.Tool.NONE
-	else:
-		# Nếu ô trống, tay sẽ không cầm gì
-		Global.toolselected = Global.Tool.NONE
-
-func spawn_tool_instance(scene, type):
-	var t = scene.instantiate()
-	tool_holder.add_child(t)
-	t.setup(self)
-	Global.toolselected = type
-
-func spawn_tools():
-	var hoe: ToolBase = hoe_scene.instantiate()
-	var shovel: ToolBase = shovel_scene.instantiate()
-
-	tool_holder.add_child(hoe)
-	tool_holder.add_child(shovel)
-
-	hoe.setup(self)
-	shovel.setup(self)
-
-	hoe.visible = true
-	shovel.visible = false
-	current_tool = hoe
-
-# =========================
-# 🔁 ĐỔI TOOL
-# =========================
-func set_active_tool(tool: Node):
-	if current_tool:
-		current_tool.visible = false
-
-	current_tool = tool
-	current_tool.visible = true
-
 # =========================
 # 🎮 VÒNG LẶP VẬT LÝ
 # =========================

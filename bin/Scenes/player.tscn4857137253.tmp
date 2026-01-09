@@ -1,8 +1,10 @@
-[gd_scene load_steps=24 format=3 uid="uid://n0v0kcom6rau"]
+[gd_scene load_steps=26 format=3 uid="uid://n0v0kcom6rau"]
 
 [ext_resource type="Script" uid="uid://bohjh0v5o1qi5" path="res://bin/Scripts/player.gd" id="1_onrkg"]
+[ext_resource type="PackedScene" uid="uid://c2t38104uv1qo" path="res://bin/Scenes/hoe.tscn" id="2_47hf4"]
 [ext_resource type="Texture2D" uid="uid://cki0goghiba0" path="res://bin/pictures/farmingTilesheetComplete.png" id="2_i3pqv"]
 [ext_resource type="FontFile" uid="uid://dqd1s6jw5j35l" path="res://bin/pixel_operator/PixelOperatorMono.ttf" id="3_i3pqv"]
+[ext_resource type="PackedScene" uid="uid://bck6kxnrrwrn5" path="res://bin/Scenes/shovel.tscn" id="3_jot67"]
 [ext_resource type="PackedScene" uid="uid://c0lg15abomslc" path="res://bin/Scenes/clock.tscn" id="4_dvve6"]
 [ext_resource type="PackedScene" uid="uid://cwjqi8ojwkab8" path="res://bin/Scenes/CollectableItem.tscn" id="4_mjsew"]
 [ext_resource type="Script" uid="uid://x6iq2uom35t0" path="res://bin/Scripts/Inventory.gd" id="7_jot67"]
@@ -135,6 +137,8 @@ animations = [{
 z_index = 1
 motion_mode = 1
 script = ExtResource("1_onrkg")
+hoe_scene = ExtResource("2_47hf4")
+shovel_scene = ExtResource("3_jot67")
 collectable_item_scene = ExtResource("4_mjsew")
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
@@ -157,6 +161,8 @@ shape = SubResource("CircleShape2D_onrkg")
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(5, 5)
 position_smoothing_enabled = true
+
+[node name="ToolHolder" type="Node2D" parent="."]
 
 [node name="Inventory" type="Node" parent="."]
 unique_name_in_owner = true
@@ -183,15 +189,15 @@ position = Vector2(42, 36)
 scale = Vector2(3.375, 2.9375)
 sprite_frames = SubResource("SpriteFrames_2hs0m")
 
+[node name="Hotbar" parent="CanvasLayer" instance=ExtResource("7_mjsew")]
+offset_left = 330.0
+offset_top = 580.0
+offset_right = 871.0
+offset_bottom = 641.0
+
 [node name="InventoryUI" parent="CanvasLayer" instance=ExtResource("10_7m14i")]
 unique_name_in_owner = true
-offset_left = 328.0
-offset_top = 305.0
-offset_right = 368.0
-offset_bottom = 345.0
-
-[node name="Hotbar" parent="CanvasLayer" instance=ExtResource("7_mjsew")]
-offset_left = 326.0
-offset_top = 567.0
-offset_right = 867.0
-offset_bottom = 628.0
+offset_left = 79.0
+offset_top = 155.0
+offset_right = 119.0
+offset_bottom = 195.0

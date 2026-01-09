@@ -1,8 +1,8 @@
 [gd_scene load_steps=4 format=3 uid="uid://dittbeb7a4mlk"]
 
-[ext_resource type="Texture2D" uid="uid://8w7imk0a4a0n" path="res://bin/pictures/hotbar.png" id="1_nj8yc"]
+[ext_resource type="Texture2D" uid="uid://dx3ymluxyhxt7" path="res://bin/pictures/hotbar.png" id="1_nj8yc"]
 [ext_resource type="Script" uid="uid://cdd1ucfcybwsx" path="res://bin/Scripts/hotbar.gd" id="1_udypn"]
-[ext_resource type="Texture2D" uid="uid://chqcf8ct36312" path="res://bin/pictures/selected-hotbar.png" id="2_rucsi"]
+[ext_resource type="Texture2D" uid="uid://b71jqafog1olx" path="res://bin/pictures/selected-hotbar.png" id="2_rucsi"]
 
 [node name="Hotbar" type="Control"]
 layout_mode = 3
@@ -11,12 +11,7 @@ offset_right = 540.0
 offset_bottom = 60.0
 script = ExtResource("1_udypn")
 
-[node name="Grid" type="HBoxContainer" parent="."]
-layout_mode = 0
-offset_right = 540.0
-offset_bottom = 60.0
-
-[node name="Hotbar" type="Sprite2D" parent="Grid"]
+[node name="Hotbar" type="Sprite2D" parent="."]
 position = Vector2(270.49997, 29.999998)
 scale = Vector2(3.7569444, 3.7499998)
 texture = ExtResource("1_nj8yc")
@@ -26,3 +21,8 @@ layout_mode = 0
 offset_right = 60.0
 offset_bottom = 60.0
 texture = ExtResource("2_rucsi")
+
+[node name="Grid" type="HBoxContainer" parent="."]
+layout_mode = 0
+offset_right = 540.0
+offset_bottom = 60.0

@@ -51,7 +51,7 @@ func update_grid():
 	print("Số lượng item trong kho: ", inventory_ref.items.size())
 	
 	# --- [SỬA LẠI] Dùng vòng lặp có index (i) để biết ô số mấy ---
-	for i in range(inventory_ref.items.size()):
+	for i in range(9, inventory_ref.items.size()):
 		var item_info = inventory_ref.items[i]
 		var slot_instance = slot_scene.instantiate()
 		grid.add_child(slot_instance)
@@ -72,7 +72,7 @@ func _on_slot_clicked(index: int, item: ItemData):
 	# Kiểm tra nếu nhấn chuột phải (Right Click) để VỨT ĐỒ
 	if Input.is_mouse_button_pressed(MOUSE_BUTTON_RIGHT):
 		# 1. Xóa khỏi kho (xóa 1 cái)
-		var removed_data = inventory_ref.remove_item_at_index(index, 1)
+		var removed_data = inventory_ref.remove_item_at_index(index + 9, 1)
 		
 		# 2. Gọi Player spawn đồ ra đất
 		if removed_data.has("item"):

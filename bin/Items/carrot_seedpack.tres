@@ -1,9 +1,10 @@
 [gd_resource type="Resource" script_class="ItemData" load_steps=3 format=3 uid="uid://uyx5gd4qku10"]
 
-[ext_resource type="Texture2D" uid="uid://b6bchbef5hay8" path="res://bin/pictures/carrot_seedpack.png" id="1_mmt43"]
+[ext_resource type="Texture2D" uid="uid://de5ty7w4awpjn" path="res://bin/pictures/carrot_seedpack.png" id="1_mmt43"]
 [ext_resource type="Script" uid="uid://d1dl2qmfrbcew" path="res://bin/Scripts/ItemData.gd" id="1_yjewj"]
 
 [resource]
 script = ExtResource("1_yjewj")
+id = 20
 icon = ExtResource("1_mmt43")
 metadata/_custom_type_script = "uid://d1dl2qmfrbcew"

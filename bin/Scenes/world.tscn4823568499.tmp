@@ -1,16 +1,15 @@
-[gd_scene load_steps=14 format=3 uid="uid://pyfjpg0q31bv"]
+[gd_scene load_steps=13 format=3 uid="uid://pyfjpg0q31bv"]
 
 [ext_resource type="Texture2D" uid="uid://cki0goghiba0" path="res://bin/pictures/farmingTilesheetComplete.png" id="1_boaiq"]
-[ext_resource type="Script" uid="uid://cnai0yevg8cd8" path="res://bin/Scripts/world.gd" id="1_brevc"]
+[ext_resource type="Script" uid="uid://beg6rv1vn0obh" path="res://bin/Scripts/collectable_item.gd" id="1_t8323"]
 [ext_resource type="PackedScene" uid="uid://bs3416thneq24" path="res://bin/Scenes/growingzone.tscn" id="2_7ix1w"]
 [ext_resource type="PackedScene" uid="uid://n0v0kcom6rau" path="res://bin/Scenes/player.tscn" id="3_n7j42"]
 [ext_resource type="Script" uid="uid://c1g12cc12wuaa" path="res://bin/Scripts/player_spawner.gd" id="5_brevc"]
 [ext_resource type="PackedScene" uid="uid://b58ly3j61trn5" path="res://bin/Scenes/weather_control.tscn" id="8_esj5c"]
-[ext_resource type="PackedScene" uid="uid://cwjqi8ojwkab8" path="res://bin/Scenes/CollectableItem.tscn" id="8_t8323"]
-[ext_resource type="Resource" uid="uid://c1rvucgcadr44" path="res://bin/Items/shovel.tres" id="9_dka8r"]
+[ext_resource type="PackedScene" uid="uid://cwjqi8ojwkab8" path="res://bin/Scenes/CollectableItem.tscn" id="8_oxsr6"]
+[ext_resource type="Resource" uid="uid://cnq0vmlwlmw00" path="res://bin/Items/hoe.tres" id="9_fx6pk"]
 [ext_resource type="PackedScene" uid="uid://c42nsxm86ki5s" path="res://bin/Scenes/notification_layer.tscn" id="9_oxsr6"]
-[ext_resource type="Resource" uid="uid://dbbjf51acufih" path="res://bin/Items/onion_seedpack.tres" id="10_blv8b"]
-[ext_resource type="Resource" uid="uid://cj2guphfvqptf" path="res://bin/Items/onion.tres" id="11_tajgl"]
+[ext_resource type="Resource" uid="uid://c1rvucgcadr44" path="res://bin/Items/shovel.tres" id="10_dka8r"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_s6p3q"]
 texture = ExtResource("1_boaiq")
@@ -186,7 +185,7 @@ texture = ExtResource("1_boaiq")
 sources/0 = SubResource("TileSetAtlasSource_s6p3q")
 
 [node name="world" type="Node2D"]
-script = ExtResource("1_brevc")
+script = ExtResource("1_t8323")
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = SubResource("TileSet_7ix1w")
@@ -208,14 +207,8 @@ network_player = ExtResource("3_n7j42")
 
 [node name="NotificationLayer" parent="." instance=ExtResource("9_oxsr6")]
 
-[node name="CollectableItem" parent="." instance=ExtResource("8_t8323")]
-position = Vector2(110, 127)
-initial_item = ExtResource("9_dka8r")
+[node name="dropedhoe" parent="." instance=ExtResource("8_oxsr6")]
+initial_item = ExtResource("9_fx6pk")
 
-[node name="CollectableItem2" parent="." instance=ExtResource("8_t8323")]
-position = Vector2(128, 67)
-initial_item = ExtResource("10_blv8b")
-
-[node name="CollectableItem3" parent="." instance=ExtResource("8_t8323")]
-position = Vector2(69, 78)
-initial_item = ExtResource("11_tajgl")
+[node name="CollectableItem" parent="." instance=ExtResource("8_oxsr6")]
+initial_item = ExtResource("10_dka8r")
