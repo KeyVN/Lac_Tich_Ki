@@ -9,7 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://cwjqi8ojwkab8" path="res://bin/Scenes/CollectableItem.tscn" id="8_t8323"]
 [ext_resource type="Resource" uid="uid://c1rvucgcadr44" path="res://bin/Items/shovel.tres" id="9_dka8r"]
 [ext_resource type="PackedScene" uid="uid://c42nsxm86ki5s" path="res://bin/Scenes/notification_layer.tscn" id="9_oxsr6"]
-[ext_resource type="Resource" uid="uid://dbbjf51acufih" path="res://bin/Items/onion_seedpack.tres" id="10_blv8b"]
+[ext_resource type="Resource" uid="uid://uyx5gd4qku10" path="res://bin/Items/carrot_seedpack.tres" id="11_t8323"]
 [ext_resource type="Resource" uid="uid://cj2guphfvqptf" path="res://bin/Items/onion.tres" id="11_tajgl"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_s6p3q"]
@@ -210,12 +210,12 @@ network_player = ExtResource("3_n7j42")
 
 [node name="CollectableItem" parent="." instance=ExtResource("8_t8323")]
 position = Vector2(110, 127)
-initial_item = ExtResource("9_dka8r")
+initial_item = ExtResource("11_tajgl")
 
 [node name="CollectableItem2" parent="." instance=ExtResource("8_t8323")]
 position = Vector2(128, 67)
-initial_item = ExtResource("10_blv8b")
+initial_item = ExtResource("9_dka8r")
 
 [node name="CollectableItem3" parent="." instance=ExtResource("8_t8323")]
 position = Vector2(69, 78)
-initial_item = ExtResource("11_tajgl")
+initial_item = ExtResource("11_t8323")
