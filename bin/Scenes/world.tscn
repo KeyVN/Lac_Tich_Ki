@@ -197,7 +197,7 @@ layer_0/tile_data = PackedInt32Array(131072, 65536, 7, 131073, 65536, 7, 2, 6553
 visible = false
 
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
-_spawnable_scenes = PackedStringArray("uid://n0v0kcom6rau")
+_spawnable_scenes = PackedStringArray("uid://n0v0kcom6rau", "uid://cwjqi8ojwkab8")
 spawn_path = NodePath("..")
 script = ExtResource("5_brevc")
 network_player = ExtResource("3_n7j42")

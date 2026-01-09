@@ -10,6 +10,10 @@ func _ready():
 	items.resize(size)
 
 func add_item(item_data: ItemData, quantity: int) -> bool:
+	if item_data == null:
+		print("Lỗi: Đang cố thêm một item rỗng vào túi!")
+		return false
+		
 	# GIAI ĐOẠN 1: TÌM ĐỂ CỘNG DỒN (STACKING) - Ưu tiên cộng vào ô đang có sẵn
 	for i in range(items.size()):
 		if items[i] != null and items[i]["item"] == item_data:

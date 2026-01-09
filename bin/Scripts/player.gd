@@ -182,16 +182,35 @@ func collect_item(item: ItemData, quantity: int) -> bool:
 		return success
 	return false
 
-# Hàm vứt đồ ra thế giới
+# --- [SỬA LẠI HOÀN TOÀN HÀM NÀY] ---
 func drop_item(item: ItemData, quantity: int):
+	# Bước 1: Client gọi RPC gửi yêu cầu lên Server
+	# Chúng ta gửi đường dẫn file item (resource_path) vì RPC không gửi được cả cục Resource
+	rpc_id(1, "server_spawn_item", item.resource_path, quantity, global_position)
+
+# --- [HÀM MỚI] Chỉ chạy trên Server (ID 1) ---
+@rpc("any_peer", "call_local")
+func server_spawn_item(item_path: String, quantity: int, drop_pos: Vector2):
+	# Chỉ Server mới được quyền Spawn
+	if not multiplayer.is_server(): return
+	
+	# Load lại item từ đường dẫn
+	var item_data = load(item_path)
+	if item_data == null: return
+	
 	if collectable_item_scene == null:
-		print("Chưa gán CollectableItem Scene cho Player!")
+		print("Chưa gán CollectableItem Scene!")
 		return
 		
 	var world_item = collectable_item_scene.instantiate()
 	
-	# Spawn tại vị trí player + một chút ngẫu nhiên để không bị chồng chéo
-	world_item.global_position = global_position + Vector2(randf_range(-20, 20), randf_range(-20, 20))
+	# Đặt vị trí rơi (cộng chút ngẫu nhiên)
+	world_item.global_position = drop_pos + Vector2(randf_range(-20, 20), randf_range(-20, 20))
 	
-	world_item.init(item, quantity)
-	get_parent().add_child(world_item) # Thêm vào World (Node cha của Player)
+	# Khởi tạo dữ liệu
+	world_item.init(item_data, quantity)
+	
+	# --- [QUAN TRỌNG NHẤT] ---
+	# Thêm vào node cha của Player (chính là World)
+	# Để MultiplayerSpawner của World nhìn thấy và đồng bộ
+	get_parent().add_child(world_item, true)
